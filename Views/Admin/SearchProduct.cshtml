@@ -1,0 +1,51 @@
+﻿@model IEnumerable<productManagementSystem.Models.Product>
+
+@{ ViewBag.Title = "Search Product"; }
+
+<h2>Search Product</h2>
+
+@using (Html.BeginForm())
+{
+<div class="form-group">
+    <label for="searchTerm">Search by Name or Description</label>
+    <input type="text" id="searchTerm" name="searchTerm" class="form-control" value="@Request["searchTerm"]" />
+</div>
+                <button type="submit" class="btn btn-primary">Search</button>
+}
+
+<h3>Search Results</h3>
+
+@if (Model != null && Model.Any())
+{
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock Count</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+<tr>
+    <td>@product.Name</td>
+    <td>@product.Description</td>
+    <td>@product.Price</td>
+    <td>@product.StockCount</td>
+    <td>
+        <!-- Edit Button -->
+        @Html.ActionLink("Edit", "UpdateProduct", new { id = product.ProductId }, new { @class = "btn btn-primary btn-sm" })
+
+        <!-- Delete Button -->
+        @Html.ActionLink("Delete", "DeleteProduct", new { id = product.ProductId }, new { @class = "btn btn-danger btn-sm" })
+    </td>
+</tr>}
+    </tbody>
+</table> }
+            else
+            {
+<p>No products found matching your search criteria.</p>}
+<a href="@Url.Action("Dashboard", "Admin")" class="btn btn-secondary">Back to Dashboard</a>

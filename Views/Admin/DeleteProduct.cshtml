@@ -1,0 +1,29 @@
+﻿@model productManagementSystem.Models.Product
+
+@{ ViewBag.Title = "Delete Product"; }
+
+<h2>Delete Product</h2>
+
+<p>Are you sure you want to delete the following product?</p>
+
+<div class="form-group">
+    <strong>Name:</strong> @Model.Name
+</div>
+
+<div class="form-group">
+    <strong>Description:</strong> @Model.Description
+</div>
+
+<div class="form-group">
+    <strong>Price:</strong> @Model.Price
+</div>
+
+<div class="form-group">
+    <strong>Stock Count:</strong> @Model.StockCount
+</div>
+
+@using (Html.BeginForm("ConfirmDeleteProduct", "Admin", new { id = Model.ProductId }, FormMethod.Post))
+{
+<button type="submit" class="btn btn-danger">Delete</button>}
+
+<a href="@Url.Action("ProductDetails", "Admin")" class="btn btn-secondary">Cancel</a>

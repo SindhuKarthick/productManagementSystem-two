@@ -1,0 +1,28 @@
+﻿@model productManagementSystem.Models.Product
+
+@{ ViewBag.Title = "Product Details"; }
+
+<h2>@Model.Name</h2>
+
+<div class="form-group">
+    <strong>Description:</strong> @Model.Description
+</div>
+
+<div class="form-group">
+    <strong>Price:</strong> @Model.Price
+</div>
+
+<div class="form-group">
+    <strong>Stock Count:</strong> @Model.StockCount
+</div>
+
+@if (Model.StockCount > 0)
+{
+@using (Html.BeginForm("BuyProduct", "Customer", new { productId = Model.ProductId }))
+{
+<button type="submit" class="btn btn-success">Buy Now</button>} }
+else
+{
+<p class="text-danger">Out of stock</p>}
+
+<a href="@Url.Action("ProductList", "Customer")" class="btn btn-secondary">Back to Product List</a>

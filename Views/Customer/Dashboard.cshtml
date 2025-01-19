@@ -1,0 +1,45 @@
+﻿@{ ViewBag.Title = "Customer Dashboard"; }
+
+<h2>Customer Dashboard</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+<div class="alert alert-success">
+    @TempData["SuccessMessage"]
+</div>}
+@if (TempData["ErrorMessage"] != null)
+{
+<div class="alert alert-danger">
+    @TempData["ErrorMessage"]
+</div>}
+
+<h3>All Products</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock Count</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+<tr>
+    <td>@product.Name</td>
+    <td>@product.Description</td>
+    <td>@product.Price</td>
+    <td>@product.StockCount</td>
+    <td>
+        @using (Html.BeginForm("BuyProduct", "Customer", new { productId = product.ProductId }))
+        {
+<button type="submit" class="btn btn-success">Buy</button>}
+    </td>
+</tr>
+}
+    </tbody>
+</table>
+
+<a href="@Url.Action("Logout", "Customer")" class="btn btn-secondary">Logout</a>

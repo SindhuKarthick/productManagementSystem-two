@@ -1,0 +1,32 @@
+﻿@model productManagementSystem.Models.User
+@{ ViewBag.Title = "Customer Login"; }
+
+<h2>Customer Login</h2>
+
+@if (ViewBag.Error != null)
+{
+<div class="alert alert-danger">
+    @ViewBag.Error
+</div>}
+
+@using (Html.BeginForm())
+{
+<div class="form-group">
+    @Html.LabelFor(m => m.Username, "Username")
+    @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Enter your username" })
+</div>
+
+                <div class="form-group">
+                    @Html.Label("Password", "Password")
+                    <input type="password" name="password" class="form-control" placeholder="Enter your password" />
+                </div>
+
+                                <button type="submit" class="btn btn-primary">Login</button>}
+
+<p>
+    New Customer ? <a href="@Url.Action("SignIn", "Customer")">Sign In</a>
+</p>
+
+<p>
+    <a href="@Url.Action("ForgetPassword", "Customer")">Forgot Password?</a>
+</p>

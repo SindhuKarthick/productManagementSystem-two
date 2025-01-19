@@ -1,0 +1,31 @@
+﻿@{ ViewBag.Title = "Product List"; }
+
+<h2>Product List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Stock Count</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+<tr>
+    <td>@product.Name</td>
+    <td>@product.Description</td>
+    <td>@product.Price</td>
+    <td>@product.StockCount</td>
+    <td>
+        @Html.ActionLink("View Details", "ProductDetails", "Customer", new { id = product.ProductId }, null)
+    </td>
+</tr>
+}
+    </tbody>
+</table>
+
+<a href="@Url.Action("Logout", "Customer")" class="btn btn-secondary">Logout</a>
